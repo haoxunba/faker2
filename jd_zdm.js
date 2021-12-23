@@ -59,7 +59,7 @@ async function main() {
 function zdm(prizeType, business, id, poolBaseId, prizeGroupId, prizeBaseId) {
   let body = { "linkId": appid, "businessSource": "DAY_DAY_RED_PACKET_SIGN", "base": { "prizeType": prizeType, "business": business, "id": id, "poolBaseId": poolBaseId, "prizeGroupId": prizeGroupId, "prizeBaseId": prizeBaseId } }
   return new Promise(resolve => {
-    $.get(taskPostUrl("https://search.smzdm.com/?c=faxian&s=%E4%B9%90%E9%AB%98&order=time&f_c=zhi&v=b"), async (err, resp, data) => {
+    $.get("https://search.smzdm.com/?c=faxian&s=%E4%B9%90%E9%AB%98&order=time&f_c=zhi&v=b", async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${err}`)
@@ -67,65 +67,6 @@ function zdm(prizeType, business, id, poolBaseId, prizeGroupId, prizeBaseId) {
         } else {
           console.log(`111111111`)
           await notify.sendNotify(`111`, `111`);
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function signPrizeDetailList() {
-  let body = { "linkId": appid, "serviceName": "dayDaySignGetRedEnvelopeSignService", "business": 1, "pageSize": 20, "page": 1 }
-  return new Promise(resolve => {
-    $.post(taskPostUrl("signPrizeDetailList", body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${err}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data);
-            $.tasklist = data.data.prizeDrawBaseVoPageBean.items;
-          } else {
-            console.log("没有返回数据")
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function apSignIn_day() {
-  let body = { "linkId": appid, "serviceName": "dayDaySignGetRedEnvelopeSignService", "business": 1 }
-  return new Promise(resolve => {
-    $.post(taskPostUrl("apSignIn_day", body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${err}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data);
-            if (data.success) {
-              if (data.data.retCode === 0) {
-                console.log(`签到状态：${data.errMsg}`)
-              } else if (data.data.retCode === 10010) {
-                console.log(data.data.retMessage)
-                $.hotFlag = true;
-              } else {
-                console.log(data.data.retMessage)
-              }
-            } else {
-              console.log(JSON.stringify(data));
-            }
-          } else {
-            console.log("没有返回数据")
-          }
         }
       } catch (e) {
         $.logErr(e, resp)
