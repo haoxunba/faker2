@@ -59,7 +59,7 @@ async function main() {
 function zdm(prizeType, business, id, poolBaseId, prizeGroupId, prizeBaseId) {
   let body = { "linkId": appid, "businessSource": "DAY_DAY_RED_PACKET_SIGN", "base": { "prizeType": prizeType, "business": business, "id": id, "poolBaseId": poolBaseId, "prizeGroupId": prizeGroupId, "prizeBaseId": prizeBaseId } }
   return new Promise(resolve => {
-    $.get("https://search.smzdm.com/?c=faxian&s=%E4%B9%90%E9%AB%98&order=time&f_c=zhi&v=b", async (err, resp, data) => {
+    $.get(taskPostUrl("https://search.smzdm.com/?c=faxian&s=%E4%B9%90%E9%AB%98&order=time&f_c=zhi&v=b"), async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${err}`)
@@ -79,7 +79,7 @@ function zdm(prizeType, business, id, poolBaseId, prizeGroupId, prizeBaseId) {
 
 function taskPostUrl(function_id, body) {
   return {
-    url: `https://api.m.jd.com/?functionId=${function_id}&body=${escape(JSON.stringify(body))}&_t=${new Date().getTime()}&appid=activities_platform`,
+    url: function_id,
     headers: {
       "Host": "api.m.jd.com",
       "Content-Type": "application/x-www-form-urlencoded",
@@ -91,6 +91,25 @@ function taskPostUrl(function_id, body) {
       "Content-Length": "206",
       "Accept-Language": "zh-cn",
       "Cookie": cookie,
+
+//       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+// "Accept-Encoding": "gzip, deflate, br",
+// "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+// "Cache-Control": "no-cache"
+// Connection: keep-alive
+// Cookie: device_id=3082891270159628934896157724fb971cb9b10a33bb31b06bb87727e9; __ckguid=Xk96PT7BtcrP8p82QqRjAcf7; _ga=GA1.2.86838965.1596289342; _ga_09SRZM2FDD=GS1.1.1634561923.1.1.1634562041.0; Hm_lvt_9b7ac3d38f30fe89ff0b8a0546904e58=1640006799; smzdm_user_source=617C651861964AC57DBCBB84C162C7AF; __gads=ID=176b16f6e7008950:T=1640008231:S=ALNI_Mbs9hPSL6sl82rH8WDH6QqCySMmDw; sess=AT-wG7%2BB9VWv28O62eZ03tLA6xM%2Bx4UVf%2FopIgd3aMjS6IZcfTm2mNYWkwpAbkqSxlvXR2JLtOtBA%2F0Jwf0bpsb4%2BCs0uSsNsOSnbzh09EmmScpKJp8oCeOkp%2BQ; user=user%3A4746254940%7C4746254940; smzdm_id=4746254940; homepage_sug=c; r_sort_type=score; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%224746254940%22%2C%22first_id%22%3A%22173aa42581c1c-0d59a09a522e5c-31647305-1764000-173aa42581d8db%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%2C%22%24latest_landing_page%22%3A%22https%3A%2F%2Fzhiyou.smzdm.com%2Fmember%2F9687682701%2Fbaoliao%2F%22%7D%2C%22%24device_id%22%3A%22173aa42581c1c-0d59a09a522e5c-31647305-1764000-173aa42581d8db%22%7D; _zdmA.uid=ZDMA.eWAStyxfd.1640008483.2419200; s_his=%E4%B9%90%E9%AB%98; __jsluid_s=cc58a00ce91934b8e60c47a6b4c175a5; ss_ab=ss45; Hm_lpvt_9b7ac3d38f30fe89ff0b8a0546904e58=1640265057; amvid=2a5a802c8f88eb42048cd820d89d5aef
+// Host: search.smzdm.com
+// Pragma: no-cache
+// Referer: https://search.smzdm.com/?c=faxian&s=%E4%B9%90%E9%AB%98&order=score&f_c=zhi&v=b
+// sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+// sec-ch-ua-mobile: ?0
+// sec-ch-ua-platform: "macOS"
+// Sec-Fetch-Dest: document
+// Sec-Fetch-Mode: navigate
+// Sec-Fetch-Site: same-origin
+// Sec-Fetch-User: ?1
+// Upgrade-Insecure-Requests: 1
+// User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
     }
   }
 }
